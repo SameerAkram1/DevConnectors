@@ -11,7 +11,7 @@ const { check, validationResult } = require('express-validator');
 //@description   Test route
 //@access        Public
 
-router.get('/',auth, async (req, res) =>{
+router.get('/', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
         res.json(user);
@@ -38,7 +38,7 @@ router.post('/', [
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const {email, password } = req.body;
+        const { email, password } = req.body;
         try {
             //See if user exist
             let user = await User.findOne({ email });
@@ -51,15 +51,15 @@ router.post('/', [
                 });
             }
 
-            const isMatch = await bcrypt.compare(password,user.password);
-            if(!isMatch){
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (!isMatch) {
                 return res.status(400).json({
                     errors: [{
                         msg: 'Invalid Credentials'
                     }]
                 });
             }
-            
+
             //Return jsonwebtoken
             const payload = {
                 user: {
@@ -69,10 +69,10 @@ router.post('/', [
 
             jwt.sign(payload,
                 config.get('jwtSecret'),
-                {expiresIn: 360000},
-                (err, token) =>{
-                    if(err) throw err;
-                    res.json({token});
+                { expiresIn: 360000 },
+                (err, token) => {
+                    if (err) throw err;
+                    res.json({ token });
                 });
 
 
@@ -80,5 +80,5 @@ router.post('/', [
             console.error(error.message);
             return res.status(500).send('Server error');
         }
-});
+    });
 module.exports = router;
