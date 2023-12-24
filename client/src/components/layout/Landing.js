@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {connect} from 'react-redux';
 const Landing = () => {
   return (
     <div>
@@ -22,4 +22,4 @@ const Landing = () => {
   );
 }
 
-export default Landing;
+export default connect()(Landing);
