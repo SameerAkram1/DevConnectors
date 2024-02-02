@@ -17,6 +17,10 @@ import CreateProfile from './components/layout/profile-forms/CreateProfile';
 import EditProfile from './components/layout/profile-forms/EditProfile';
 import AddExperience from './components/layout/profile-forms/AddExperience';
 import AddEducation from './components/layout/profile-forms/AddEducation';
+import Profiles from './components/layout/profiles/Profiles';
+import Posts from './components/layout/posts/Posts';
+import Profile from './components/layout/profile/Profile'
+import Post from './components/layout/post/Post';
 
 
 if (localStorage.token) {
@@ -43,13 +47,22 @@ const App = () => {
                         <Routes>
                             <Route exact path="/register" Component={Register}></Route>
                             <Route exact path="/login" Component={Login}></Route>
+                            <Route exact path="/profiles" Component={Profiles}></Route>
                             <Route exact path="/create-profile" Component={CreateProfile}></Route>
 
-
+                            <Route exact path="/profile/:id" Component={Profile}></Route>
                             <Route path="/dashboard"
                                 element={
                                     <PrivateRoute>
                                         <Dashboard />
+                                    </PrivateRoute>
+                                }
+                            ></Route>
+
+                            <Route path="/posts"
+                                element={
+                                    <PrivateRoute>
+                                        <Posts />
                                     </PrivateRoute>
                                 }
                             ></Route>
@@ -61,6 +74,15 @@ const App = () => {
                                     </PrivateRoute>
                                 }
                             ></Route>
+
+                            <Route path="/posts/:id"
+                                element={
+                                    <PrivateRoute>
+                                        <Post />
+                                    </PrivateRoute>
+                                }
+                            ></Route>
+
                             <Route path="/edit-profile"
                                 element={
                                     <PrivateRoute>
@@ -83,6 +105,9 @@ const App = () => {
                                     </PrivateRoute>
                                 }
                             ></Route>
+
+
+
                         </Routes>
                     </section>
 

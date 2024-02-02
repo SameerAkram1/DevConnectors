@@ -1,19 +1,25 @@
+require('dotenv').config()
 const mongoose = require('mongoose')
 
 const config = require('config');
 
-const db = config.get('mongoURI');
+
+
+
+const mongoURI = process.env.mongoURI
 
 
 //this will return us promise
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(db,{
-            useNewUrlParser: true })
+        await mongoose.connect(mongoURI, {
+            useNewUrlParser: true
+        })
 
-        
+
         console.log('MongoDB connected...');
+
     } catch (err) {
         console.error(err.message);
 

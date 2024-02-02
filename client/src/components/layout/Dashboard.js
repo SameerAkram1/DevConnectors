@@ -13,7 +13,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
     useEffect(
         () => {
             getCurrentProfile();
-        }, []
+        }, [getCurrentProfile]
     )
 
     return (loading && profile === null ? (<iframe src="https://giphy.com/embed/PUYgk3wpNk0WA" width="100%" height="100%" frameBorder="0" ></iframe>)
